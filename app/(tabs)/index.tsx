@@ -1,98 +1,96 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { View, Text, ScrollView, Pressable, Link } from '@/src/tw';
+import { Screen } from '@/components/screen';
+import { MotiView } from 'moti';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <Screen className="bg-near-black">
+      <ScrollView className="flex-1 px-5" contentContainerClassName="pb-10 pt-4">
+        {/* Header */}
+        <MotiView
+          from={{ opacity: 0, translateY: -20 }}
+          animate={{ opacity: 1, translateY: 0 }}
+          transition={{ type: 'timing', duration: 800 }}
+          className="flex-row justify-between items-center mb-8"
+        >
+          <View>
+            <Text className="text-white/60 font-inter text-xs">Total Balance</Text>
+            <Text className="text-white font-inter text-3xl font-extrabold">$24,560.00</Text>
+          </View>
+          <Pressable className="bg-brand-violet/20 p-3 rounded-full border border-brand-violet/30">
+            <IconSymbol name="bell" size={24} color="#6C3FF5" />
+          </Pressable>
+        </MotiView>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+        {/* Action Buttons */}
+        <MotiView
+          from={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 200, type: 'timing' }}
+          className="flex-row gap-4 mb-10"
+        >
+          <Pressable className="flex-1 bg-brand-violet py-4 rounded-2xl flex-row justify-center items-center">
+            <IconSymbol name="plus" size={20} color="white" />
+            <Text className="text-white font-inter font-semibold ml-2">Add Fund</Text>
+          </Pressable>
+          <Pressable className="flex-1 bg-white/10 py-4 rounded-2xl flex-row justify-center items-center border border-white/5">
+            <IconSymbol name="paperplane" size={20} color="white" />
+            <Text className="text-white font-inter font-semibold ml-2">Transfer</Text>
+          </Pressable>
+        </MotiView>
+
+        {/* My Vaults Section */}
+        <MotiView
+          from={{ opacity: 0, translateY: 20 }}
+          animate={{ opacity: 1, translateY: 0 }}
+          transition={{ delay: 400, type: 'timing' }}
+        >
+          <View className="flex-row justify-between items-center mb-4">
+            <Text className="text-white font-inter text-xl font-bold">My Vaults</Text>
+            <Text className="text-electric-cyan font-inter font-semibold">View All</Text>
+          </View>
+
+          {/* Vault Card 1 */}
+          <Link href={"/vault/personal" as any} asChild>
+            <Pressable className="bg-white/5 p-5 rounded-3xl border border-white/10 mb-4">
+              <View className="flex-row justify-between items-start mb-6">
+                <View className="bg-electric-cyan/20 p-3 rounded-2xl">
+                  <IconSymbol name="lock.fill" size={24} color="#00C9D4" />
+                </View>
+                <View className="bg-lime-green/20 px-3 py-1 rounded-full">
+                  <Text className="text-lime-green font-inter text-[10px] font-bold">ACTIVE</Text>
+                </View>
+              </View>
+              <Text className="text-white/60 font-inter text-sm mb-1">Personal Savings</Text>
+              <Text className="text-white font-inter text-2xl font-bold mb-4">$12,400.00</Text>
+              <View className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                <View className="h-full bg-electric-cyan w-3/4 rounded-full" />
+              </View>
+              <View className="flex-row justify-between mt-2">
+                <Text className="text-white/40 font-inter text-[10px]">75% of $15,000 goal</Text>
+              </View>
+            </Pressable>
+          </Link>
+
+          {/* Vault Card 2 */}
+          <Pressable className="bg-white/5 p-5 rounded-3xl border border-white/10">
+            <View className="flex-row justify-between items-start mb-6">
+              <View className="bg-amber-yellow/20 p-3 rounded-2xl">
+                <IconSymbol name="airplane" size={24} color="#FFB800" />
+              </View>
+            </View>
+            <Text className="text-white/60 font-inter text-sm mb-1">Vacation Trip</Text>
+            <Text className="text-white font-inter text-2xl font-bold mb-4">$3,200.00</Text>
+            <View className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+              <View className="h-full bg-amber-yellow w-1/4 rounded-full" />
+            </View>
+            <View className="flex-row justify-between mt-2">
+              <Text className="text-white/40 font-inter text-[10px]">25% of $12,000 goal</Text>
+            </View>
+          </Pressable>
+        </MotiView>
+      </ScrollView>
+    </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
