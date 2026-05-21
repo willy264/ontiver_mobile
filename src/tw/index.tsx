@@ -4,6 +4,7 @@ import {
 } from "react-native-css";
 
 import { Link as RouterLink } from "expo-router";
+import { MotiView as RNMotiView, MotiText as RNMotiText } from "moti";
 import Animated from "react-native-reanimated";
 import React from "react";
 import {
@@ -122,9 +123,6 @@ export const TouchableHighlight = (
   return useCssElement(XXTouchableHighlight, props, { className: "style" });
 };
 TouchableHighlight.displayName = "CSS(TouchableHighlight)";
-
-// CSS-enabled Moti components
-import { MotiView as RNMotiView, MotiText as RNMotiText } from "moti";
 
 export const MotiView = (
   props: React.ComponentProps<typeof RNMotiView> & { className?: string }

@@ -37,9 +37,10 @@ export default function LivenessScreen() {
       return () => clearTimeout(timer);
     } else {
       progress.value = withRepeat(withTiming(1, { duration: 1500, easing: Easing.linear }), -1, false);
-      setTimeout(() => router.replace('/(tabs)'), 4000);
+      const timer = setTimeout(() => router.replace('/(tabs)'), 4000);
+      return () => clearTimeout(timer);
     }
-  }, [step]);
+  }, [progress, router, step]);
 
   return (
     <Screen className="bg-slate-900 flex-1">
@@ -58,7 +59,7 @@ export default function LivenessScreen() {
         <MotiText from={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-white text-2xl font-bold mb-2 text-center">
           Liveness Check
         </MotiText>
-        <Text className="text-white/60 text-center">Follow the instructions to verify it's you.</Text>
+        <Text className="text-white/60 text-center">Follow the instructions to verify it&apos;s you.</Text>
       </View>
 
       <View className="flex-1 items-center justify-center">

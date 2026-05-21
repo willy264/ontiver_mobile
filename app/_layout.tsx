@@ -20,6 +20,7 @@ export default function RootLayout() {
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="index" />
           <Stack.Screen name="onboarding" />
+          <Stack.Screen name="(auth)" />
           <Stack.Screen name="id-type" />
           <Stack.Screen name="capture" />
           <Stack.Screen name="verify-info" />

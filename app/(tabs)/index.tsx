@@ -9,7 +9,7 @@ export default function HubScreen() {
 
   React.useEffect(() => {
     progressValue.value = withDelay(500, withTiming(0.68, { duration: 1500, easing: Easing.out(Easing.cubic) }));
-  }, []);
+  }, [progressValue]);
 
   const progressStyle = useAnimatedStyle(() => {
     return {
