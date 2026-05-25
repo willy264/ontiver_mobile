@@ -1,15 +1,14 @@
-import React from 'react';
-import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
-  AUTH_COLORS,
-  AuthField,
-  AuthScreenFrame,
-  DigitPad,
-  OtpBoxes,
-  PrimaryAuthButton,
-  SideDecorations,
+    AUTH_COLORS,
+    AuthField,
+    AuthScreenFrame,
+    DigitPad,
+    OtpBoxes,
+    PrimaryAuthButton
 } from '@/components/auth/auth-ui';
 import { Pressable, Text, View } from '@/src/tw';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import React from 'react';
 
 type Mode = 'otp' | 'code';
 
@@ -36,8 +35,7 @@ export default function RecoverEmailScreen() {
 
   return (
     <AuthScreenFrame showBackButton title="">
-      <View style={{ flex: 1, overflow: 'hidden' }}>
-        <SideDecorations />
+        <View style={{ flex: 1 }}>
         <View style={{ paddingHorizontal: 24, paddingTop: 12 }}>
           {mode === 'otp' ? (
             <>

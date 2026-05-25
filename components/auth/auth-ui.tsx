@@ -1,11 +1,10 @@
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Pressable, ScrollView, Text, TextInput, View } from '@/src/tw';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import type { KeyboardTypeOptions, TextInputProps, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import { Image, Pressable, ScrollView, Text, TextInput, View } from '@/src/tw';
 import Svg, {
   Circle,
   Defs,
@@ -443,41 +442,65 @@ export function OtpBoxes({
   onPress,
   value,
 }: OtpBoxesProps) {
+  const [cursorVisible, setCursorVisible] = React.useState(true);
   const digits = value.slice(0, length).split('');
+  const activeIndex = digits.length < length ? digits.length : undefined;
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCursorVisible((prev) => !prev);
+    }, 530);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Pressable accessibilityRole="button" onPress={onPress}>
-      <View style={{ flexDirection: 'row', gap: 8 }}>
-        {Array.from({ length }).map((_, index) => {
-          const filled = Boolean(digits[index]);
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ flexDirection: 'row', gap: 8 }}>
+          {Array.from({ length }).map((_, index) => {
+            const filled = Boolean(digits[index]);
+            const isActive = activeIndex === index;
 
-          return (
-            <View
-              key={`otp-${index}`}
-              style={{
-                alignItems: 'center',
-                borderColor: error ? '#FFB5B5' : AUTH_COLORS.border,
-                borderCurve: 'continuous',
-                borderRadius: 12,
-                borderWidth: 1.5,
-                height: 52,
-                justifyContent: 'center',
-                width: 42,
-              }}
-            >
-              <Text
-                className="font-inter font-extrabold"
+            return (
+              <View
+                key={`otp-${index}`}
                 style={{
-                  color: error ? AUTH_COLORS.error : AUTH_COLORS.ink,
-                  fontSize: 24,
-                  lineHeight: 28,
+                  alignItems: 'center',
+                  borderColor: error ? '#FFB5B5' : AUTH_COLORS.border,
+                  borderCurve: 'continuous',
+                  borderRadius: 12,
+                  borderWidth: 1.5,
+                  height: 52,
+                  justifyContent: 'center',
+                  width: 42,
                 }}
               >
-                {filled ? '*' : ''}
-              </Text>
-            </View>
-          );
-        })}
+                {filled ? (
+                  <Text
+                    className="font-inter font-extrabold"
+                    style={{
+                      color: error ? AUTH_COLORS.error : AUTH_COLORS.ink,
+                      fontSize: 24,
+                      lineHeight: 28,
+                    }}
+                  >
+                    *
+                  </Text>
+                ) : isActive && cursorVisible ? (
+                  <View
+                    style={{
+                      height: 28,
+                      width: 2,
+                      backgroundColor: AUTH_COLORS.ink,
+                      borderRadius: 1,
+                    }}
+                  />
+                ) : null}
+              </View>
+            );
+          })}
+        </View>
       </View>
     </Pressable>
   );
@@ -536,7 +559,11 @@ type IllustrationProps = {
 export function AuthIllustration({ height, source, width }: IllustrationProps) {
   return (
     <Image
+      animationDelay={60}
+      animationDuration={420}
       contentFit="contain"
+      lazyMount
+      revealOnLoad
       source={source}
       style={{ alignSelf: 'center', height, width }}
     />
@@ -569,11 +596,23 @@ type PinCellsProps = {
 };
 
 export function PinCells({ error = false, onPress, value }: PinCellsProps) {
+  const [cursorVisible, setCursorVisible] = React.useState(true);
+  const activeIndex = value.length < 6 ? value.length : undefined;
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCursorVisible((prev) => !prev);
+    }, 530);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Pressable accessibilityRole="button" onPress={onPress}>
-      <View style={{ flexDirection: 'row', gap: 4 }}>
+      <View style={{ flexDirection: 'row', gap: 8, width: '100%' }}>
         {Array.from({ length: 6 }).map((_, index) => {
           const filled = Boolean(value[index]);
+          const isActive = activeIndex === index;
 
           return (
             <View
@@ -586,19 +625,30 @@ export function PinCells({ error = false, onPress, value }: PinCellsProps) {
                 borderWidth: 1.5,
                 height: 52,
                 justifyContent: 'center',
-                width: 44,
+                flex: 1,
               }}
             >
-              <Text
-                className="font-inter font-extrabold"
-                style={{
-                  color: error ? AUTH_COLORS.error : AUTH_COLORS.ink,
-                  fontSize: 24,
-                  lineHeight: 28,
-                }}
-              >
-                {filled ? '*' : ''}
-              </Text>
+              {filled ? (
+                <Text
+                  className="font-inter font-extrabold"
+                  style={{
+                    color: error ? AUTH_COLORS.error : AUTH_COLORS.ink,
+                    fontSize: 24,
+                    lineHeight: 28,
+                  }}
+                >
+                  *
+                </Text>
+              ) : isActive && cursorVisible ? (
+                <View
+                  style={{
+                    height: 28,
+                    width: 2,
+                    backgroundColor: AUTH_COLORS.ink,
+                    borderRadius: 1,
+                  }}
+                />
+              ) : null}
             </View>
           );
         })}
@@ -607,34 +657,7 @@ export function PinCells({ error = false, onPress, value }: PinCellsProps) {
   );
 }
 
-export function SideDecorations() {
-  return (
-    <>
-      <View
-        style={{
-          backgroundColor: AUTH_COLORS.navy,
-          borderRadius: 999,
-          height: 340,
-          position: 'absolute',
-          right: -180,
-          top: 60,
-          width: 200,
-        }}
-      />
-      <View
-        style={{
-          backgroundColor: AUTH_COLORS.navy,
-          borderRadius: 999,
-          bottom: 80,
-          height: 340,
-          left: -180,
-          position: 'absolute',
-          width: 200,
-        }}
-      />
-    </>
-  );
-}
+
 
 type WhiteCardProps = {
   children: React.ReactNode;
@@ -659,73 +682,7 @@ export function WhiteSheetCard({ children, style }: WhiteCardProps) {
   );
 }
 
-type CurvedAccentProps = {
-  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'left-bottom' | 'right-middle';
-};
 
-export function CurvedAccent({ position = 'right-middle' }: CurvedAccentProps) {
-  // Support both old and new positioning systems
-  if (position === 'right-middle' || position === 'left-bottom') {
-    const isRight = position === 'right-middle';
-    return (
-      <View
-        style={{
-          backgroundColor: AUTH_COLORS.navy,
-          borderRadius: 999,
-          bottom: isRight ? undefined : 120,
-          height: isRight ? 300 : 260,
-          left: isRight ? undefined : -172,
-          position: 'absolute',
-          right: isRight ? -176 : undefined,
-          top: isRight ? 118 : undefined,
-          width: isRight ? 300 : 260,
-        }}
-      />
-    );
-  }
-
-  // New corner bracket positions
-  const cornerStyles = {
-    'top-left': {
-      top: 16,
-      left: 16,
-    },
-    'top-right': {
-      top: 16,
-      right: 16,
-    },
-    'bottom-left': {
-      bottom: 16,
-      left: 16,
-    },
-    'bottom-right': {
-      bottom: 16,
-      right: 16,
-    },
-  };
-
-  const style = cornerStyles[position as keyof typeof cornerStyles];
-
-  return (
-    <View
-      style={{
-        height: 40,
-        width: 40,
-        position: 'absolute',
-        ...style,
-      }}
-    >
-      <Svg height={40} width={40} viewBox="0 0 40 40">
-        <Circle
-          cx={20}
-          cy={20}
-          r={20}
-          fill={AUTH_COLORS.navy}
-        />
-      </Svg>
-    </View>
-  );
-}
 
 type FlowProgressProps = {
   current: number;
@@ -765,45 +722,7 @@ export function FlowProgress({
   );
 }
 
-export function DarkFlowDecorations() {
-  return (
-    <>
-      <View
-        style={{
-          backgroundColor: 'rgba(255,255,255,0.08)',
-          borderRadius: 999,
-          height: 210,
-          left: -146,
-          position: 'absolute',
-          top: 130,
-          width: 210,
-        }}
-      />
-      <View
-        style={{
-          backgroundColor: 'rgba(255,255,255,0.08)',
-          borderRadius: 999,
-          bottom: -24,
-          height: 240,
-          position: 'absolute',
-          right: -144,
-          width: 240,
-        }}
-      />
-      <View
-        style={{
-          backgroundColor: 'rgba(255,255,255,0.04)',
-          borderRadius: 999,
-          bottom: 42,
-          height: 168,
-          left: -98,
-          position: 'absolute',
-          width: 168,
-        }}
-      />
-    </>
-  );
-}
+
 
 type DigitPadProps = {
   disabled?: boolean;

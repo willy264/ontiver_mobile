@@ -1,13 +1,13 @@
-import React from 'react';
-import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
-  AUTH_COLORS,
-  DigitPad,
-  PinCells,
-  WhiteSheetCard,
+    AUTH_COLORS,
+    DigitPad,
+    PinCells,
+    WhiteSheetCard,
 } from '@/components/auth/auth-ui';
 import { Screen } from '@/components/screen';
 import { Text, View } from '@/src/tw';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function PinSetupScreen() {

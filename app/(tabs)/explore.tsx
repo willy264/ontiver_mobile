@@ -1,4 +1,3 @@
-import { Image } from 'expo-image';
 import { Platform, StyleSheet } from 'react-native';
 
 import { Collapsible } from '@/components/ui/collapsible';
@@ -8,6 +7,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Fonts } from '@/constants/theme';
+import { Image } from '@/src/tw';
 
 export default function TabTwoScreen() {
   return (
@@ -58,6 +58,10 @@ export default function TabTwoScreen() {
           different screen densities
         </ThemedText>
         <Image
+          animationDelay={90}
+          animationDuration={320}
+          lazyMount
+          revealOnLoad
           source={require('@/assets/images/react-logo.png')}
           style={{ width: 100, height: 100, alignSelf: 'center' }}
         />

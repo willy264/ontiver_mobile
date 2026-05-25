@@ -1,16 +1,14 @@
-import React from 'react';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { useRouter } from 'expo-router';
 import {
-  AUTH_COLORS,
-  DarkFlowDecorations,
-  FlowProgress,
-  StatusBanner,
+    AUTH_COLORS,
+    FlowProgress,
+    StatusBanner,
 } from '@/components/auth/auth-ui';
 import { Screen } from '@/components/screen';
-import { Image } from 'expo-image';
-import { Pressable, Text, View } from '@/src/tw';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { useRouter } from 'expo-router';
+import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Image, Pressable, Text, View } from '@/src/tw';
 
 type CaptureState =
   | 'front'
@@ -46,8 +44,6 @@ export default function DocumentCaptureScreen() {
   return (
     <Screen className="bg-[#09054F]" safe={false}>
       <View style={{ backgroundColor: AUTH_COLORS.navy, flex: 1, overflow: 'hidden' }}>
-        <DarkFlowDecorations />
-
         <View
           style={{
             flex: 1,
@@ -160,7 +156,15 @@ function CaptureCard({ previewSource }: { previewSource: number | null }) {
         }}
       >
         {previewSource ? (
-          <Image contentFit="cover" source={previewSource} style={{ flex: 1 }} />
+          <Image
+            animationDelay={80}
+            animationDuration={380}
+            contentFit="cover"
+            lazyMount
+            revealOnLoad
+            source={previewSource}
+            style={{ flex: 1 }}
+          />
         ) : null}
         <Corner position="top-left" />
         <Corner position="top-right" />

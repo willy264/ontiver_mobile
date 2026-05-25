@@ -1,14 +1,14 @@
-import React from 'react';
-import { useRouter } from 'expo-router';
 import {
-  AUTH_COLORS,
-  PrimaryAuthButton,
-  StatusBanner,
-  AuthScreenFrame,
-  SideDecorations,
+    AUTH_COLORS,
+    AuthScreenFrame,
+    PrimaryAuthButton,
+    StatusBanner
 } from '@/components/auth/auth-ui';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { Pressable, Text, View } from '@/src/tw';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { useRouter } from 'expo-router';
+import React from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type RecoveryMethod = 'email' | 'phrase' | null;
 
@@ -19,8 +19,7 @@ export default function RecoveryEntryScreen() {
 
   return (
     <AuthScreenFrame showBackButton title="">
-      <View style={{ flex: 1, overflow: 'hidden' }}>
-        <SideDecorations />
+<View style={{ flex: 1 }}>
 
         <View style={{ flex: 1, paddingHorizontal: 24, paddingTop: 12, paddingBottom: 20 }}>
           <Text

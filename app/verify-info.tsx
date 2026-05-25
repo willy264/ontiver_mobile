@@ -1,15 +1,14 @@
-import React from 'react';
-import { useRouter } from 'expo-router';
 import {
-  AUTH_COLORS,
-  AuthField,
-  AuthScreenFrame,
-  FlowProgress,
-  PrimaryAuthButton,
-  SideDecorations,
+    AUTH_COLORS,
+    AuthField,
+    AuthScreenFrame,
+    FlowProgress,
+    PrimaryAuthButton,
 } from '@/components/auth/auth-ui';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Text, View } from '@/src/tw';
+import { useRouter } from 'expo-router';
+import React from 'react';
 
 export default function VerifyInfoScreen() {
   const router = useRouter();
@@ -25,7 +24,6 @@ export default function VerifyInfoScreen() {
   return (
     <AuthScreenFrame showBackButton title="">
       <View style={{ flex: 1, overflow: 'hidden' }}>
-        <SideDecorations />
         <View style={{ paddingHorizontal: 24, paddingTop: 12 }}>
           <FlowProgress current={4} />
           <Text

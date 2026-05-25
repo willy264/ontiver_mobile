@@ -1,10 +1,9 @@
 import React from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Image } from 'expo-image';
 import { Screen } from '@/components/screen';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { VaultaShieldArt } from '@/components/auth/auth-ui';
-import { Pressable, ScrollView, Text, View } from '@/src/tw';
+import { Image, Pressable, ScrollView, Text, View } from '@/src/tw';
 
 const CREDENTIALS = [
   { id: 1, title: 'National ID', date: '15th Apr. 2026', status: 'Verified', tone: 'green' },
@@ -85,6 +84,10 @@ export default function HubScreen() {
         <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' }}>
           <View style={{ alignItems: 'center', flexDirection: 'row' }}>
             <Image
+              animationDelay={80}
+              animationDuration={360}
+              lazyMount
+              revealOnLoad
               source={{ uri: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop' }}
               style={{ borderRadius: 999, height: 48, width: 48 }}
             />

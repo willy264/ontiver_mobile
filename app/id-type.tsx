@@ -1,13 +1,13 @@
-import React from 'react';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
-  AUTH_COLORS,
-  AuthIllustration,
-  FlowProgress,
+    AUTH_COLORS,
+    AuthIllustration,
+    FlowProgress,
 } from '@/components/auth/auth-ui';
 import { Screen } from '@/components/screen';
 import { Pressable, Text, View } from '@/src/tw';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import React from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const INTRO_ART = require('@/assets/images/image 1.svg');

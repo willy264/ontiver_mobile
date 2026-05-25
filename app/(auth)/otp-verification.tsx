@@ -1,18 +1,17 @@
-import React from 'react';
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { TextInput as RNTextInput } from 'react-native';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {
-  AUTH_COLORS,
-  AuthIllustration,
-  OtpBoxes,
-  PrimaryAuthButton,
-  SideDecorations,
-  StatusToast,
+    AUTH_COLORS,
+    AuthIllustration,
+    OtpBoxes,
+    PrimaryAuthButton,
+    StatusToast,
 } from '@/components/auth/auth-ui';
 import { Screen } from '@/components/screen';
-import { Pressable, Text, View } from '@/src/tw';
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { Pressable, Text, View } from '@/src/tw';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import React from 'react';
+import { TextInput as RNTextInput } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const OTP_LENGTH = 6;
@@ -106,9 +105,7 @@ export default function OtpVerificationScreen() {
   if (verified) {
     return (
       <Screen className="bg-white" safe={false}>
-        <View style={{ flex: 1, overflow: 'hidden' }}>
-          <SideDecorations />
-
+      <View style={{ flex: 1 }}>
           <View
             style={{
               alignItems: 'center',
@@ -152,9 +149,7 @@ export default function OtpVerificationScreen() {
 
   return (
     <Screen className="bg-white" safe={false}>
-      <View style={{ flex: 1, overflow: 'hidden' }}>
-        <SideDecorations />
-
+      <View style={{ flex: 1 }}>
         <View style={{ paddingHorizontal: 24, paddingTop: insets.top + 14 }}>
           <Pressable
             accessibilityRole="button"

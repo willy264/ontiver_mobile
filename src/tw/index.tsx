@@ -16,6 +16,7 @@ import {
   TextInput as RNTextInput,
   StyleSheet,
 } from "react-native";
+import { Image as CSSImage } from "./image";
 
 // CSS-enabled Link
 export const Link = (
@@ -145,3 +146,5 @@ export const AnimatedView = (
   return useCssElement(Animated.View, props, { className: "style" });
 };
 AnimatedView.displayName = "CSS(AnimatedView)";
+
+export const Image = CSSImage;

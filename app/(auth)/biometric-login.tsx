@@ -1,6 +1,5 @@
 import {
     AuthIllustration,
-    CurvedAccent,
     PrimaryAuthButton,
     WhiteSheetCard,
 } from '@/components/auth/auth-ui';
@@ -41,14 +40,8 @@ export default function BiometricLoginScreen() {
         <WhiteSheetCard
           style={{
             marginTop: 28,
-            overflow: 'hidden',
           }}
         >
-          <CurvedAccent position="top-left" />
-          <CurvedAccent position="top-right" />
-          <CurvedAccent position="bottom-left" />
-          <CurvedAccent position="bottom-right" />
-
           <View
             style={{
               alignItems: 'center',

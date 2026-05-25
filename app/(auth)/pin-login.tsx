@@ -1,14 +1,13 @@
-import React from 'react';
-import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
-  AUTH_COLORS,
-  AuthScreenFrame,
-  DigitPad,
-  PinCells,
-  SideDecorations,
-  VaultaShieldArt,
+    AUTH_COLORS,
+    AuthScreenFrame,
+    DigitPad,
+    PinCells,
+    VaultaShieldArt,
 } from '@/components/auth/auth-ui';
 import { Pressable, Text, View } from '@/src/tw';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import React from 'react';
 
 const CORRECT_PIN = '123456';
 const LOCK_SECONDS = 29 * 60 + 42;
@@ -66,8 +65,7 @@ export default function PinLoginScreen() {
 
   return (
     <AuthScreenFrame title="">
-      <View style={{ flex: 1, overflow: 'hidden' }}>
-        <SideDecorations />
+<View style={{ flex: 1 }}>
 
         <View style={{ paddingHorizontal: 14, paddingTop: 16 }}>
           <Text

@@ -1,20 +1,17 @@
-import React from 'react';
-import { useRouter } from 'expo-router';
 import {
-  AUTH_COLORS,
-  AuthScreenFrame,
-  DarkFlowDecorations,
-  FlowProgress,
-  PrimaryAuthButton,
-  ProcessingRings,
-  SecondaryAuthButton,
-  SideDecorations,
-  StatusBanner,
-  VaultaShieldArt,
+    AUTH_COLORS,
+    AuthScreenFrame,
+    FlowProgress,
+    PrimaryAuthButton,
+    ProcessingRings,
+    SecondaryAuthButton,
+    StatusBanner,
+    VaultaShieldArt,
 } from '@/components/auth/auth-ui';
 import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Image } from 'expo-image';
-import { Pressable, Text, View } from '@/src/tw';
+import { Image, Pressable, Text, View } from '@/src/tw';
+import { useRouter } from 'expo-router';
+import React from 'react';
 
 type SelfieState =
   | 'intro'
@@ -45,7 +42,6 @@ export default function LivenessScreen() {
     return (
       <AuthScreenFrame title="">
         <View style={{ flex: 1, overflow: 'hidden' }}>
-          <SideDecorations />
           <View
             style={{
               alignItems: 'center',
@@ -87,7 +83,6 @@ export default function LivenessScreen() {
     return (
       <AuthScreenFrame title="">
         <View style={{ flex: 1, overflow: 'hidden' }}>
-          <SideDecorations />
           <View
             style={{
               alignItems: 'center',
@@ -128,7 +123,6 @@ export default function LivenessScreen() {
     return (
       <AuthScreenFrame title="">
         <View style={{ backgroundColor: AUTH_COLORS.navy, flex: 1, overflow: 'hidden' }}>
-          <DarkFlowDecorations />
           <View
             style={{
               alignItems: 'center',
@@ -170,7 +164,6 @@ export default function LivenessScreen() {
     return (
       <AuthScreenFrame title="">
         <View style={{ backgroundColor: AUTH_COLORS.navy, flex: 1, overflow: 'hidden' }}>
-          <DarkFlowDecorations />
           <View style={{ paddingHorizontal: 24, paddingTop: 16 }}>
             <Pressable onPress={() => router.back()}>
               <IconSymbol color="#FFFFFF" name="chevron.left" size={20} />
@@ -202,7 +195,6 @@ export default function LivenessScreen() {
   return (
     <AuthScreenFrame title="">
       <View style={{ backgroundColor: AUTH_COLORS.navy, flex: 1, overflow: 'hidden' }}>
-        <DarkFlowDecorations />
         <View style={{ paddingHorizontal: 24, paddingTop: 16 }}>
           <View style={{ alignItems: 'center', flexDirection: 'row', gap: 18 }}>
             <Pressable onPress={() => router.back()}>
@@ -223,6 +215,10 @@ export default function LivenessScreen() {
 
           <View style={{ alignItems: 'center', marginTop: 24 }}>
             <Image
+              animationDelay={100}
+              animationDuration={360}
+              lazyMount
+              revealOnLoad
               source={{ uri: 'https://em-content.zobj.net/source/apple/391/person_1f9d1.png' }}
               style={{ borderRadius: 999, height: 70, width: 70 }}
             />

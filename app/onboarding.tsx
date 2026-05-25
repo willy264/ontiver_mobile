@@ -1,13 +1,10 @@
 import React, { useRef, useState } from 'react';
-import { Dimensions, NativeSyntheticEvent, NativeScrollEvent } from 'react-native';
-import { View, Text, Pressable, AnimatedScrollView } from '@/src/tw';
+import { NativeSyntheticEvent, NativeScrollEvent, useWindowDimensions } from 'react-native';
+import { AnimatedScrollView, Image, Pressable, Text, View } from '@/src/tw';
 import { Screen } from '@/components/screen';
 import { useRouter } from 'expo-router';
-import { Image } from 'expo-image';
 import Animated, { useAnimatedStyle, useSharedValue, interpolate, Extrapolation, useAnimatedScrollHandler, SharedValue } from 'react-native-reanimated';
 import { IconSymbol } from '@/components/ui/icon-symbol';
-
-const { width } = Dimensions.get('window');
 
 const SLIDES = [
   {
@@ -33,7 +30,15 @@ const SLIDES = [
   }
 ];
 
-function PaginationDot({ index, scrollX }: { index: number; scrollX: SharedValue<number> }) {
+function PaginationDot({
+  index,
+  scrollX,
+  width,
+}: {
+  index: number;
+  scrollX: SharedValue<number>;
+  width: number;
+}) {
   const animatedStyle = useAnimatedStyle(() => {
     const widthInterpolation = interpolate(
       scrollX.value,
@@ -59,6 +64,7 @@ function PaginationDot({ index, scrollX }: { index: number; scrollX: SharedValue
 
 export default function OnboardingScreen() {
   const router = useRouter();
+  const { width } = useWindowDimensions();
   const scrollX = useSharedValue(0);
   // @ts-ignore
   const scrollRef = useRef<Animated.ScrollView>(null);
@@ -100,6 +106,10 @@ export default function OnboardingScreen() {
           {SLIDES.map((slide) => (
             <View key={slide.id} style={{ width }} className="flex-1 items-center justify-center px-6">
               <Image 
+                animationDelay={120}
+                animationDuration={460}
+                lazyMount
+                revealOnLoad
                 source={slide.image} 
                 style={{ width: '100%', height: width * 1.2 }} 
                 contentFit="contain" 
@@ -125,7 +135,7 @@ export default function OnboardingScreen() {
           {/* Pagination */}
           <View className="flex-row items-center justify-center mb-8">
             {SLIDES.map((_, i) => (
-              <PaginationDot key={i} index={i} scrollX={scrollX} />
+              <PaginationDot key={i} index={i} scrollX={scrollX} width={width} />
             ))}
           </View>
 

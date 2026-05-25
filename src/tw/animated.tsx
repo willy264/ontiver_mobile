@@ -1,6 +1,6 @@
-import * as TW from "./index";
-import RNAnimated from "react-native-reanimated";
-import { Image } from "./image";
+import * as TW from './index';
+import RNAnimated from 'react-native-reanimated';
+import { Image } from './image';
 
 export const Animated = {
   ...RNAnimated,

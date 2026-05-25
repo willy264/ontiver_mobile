@@ -1,14 +1,13 @@
-import React from 'react';
-import { useRouter } from 'expo-router';
 import {
-  AUTH_COLORS,
-  AuthScreenFrame,
-  PrimaryAuthButton,
-  SideDecorations,
-  StatusBanner,
-  VaultaShieldArt,
+    AUTH_COLORS,
+    AuthScreenFrame,
+    PrimaryAuthButton,
+    StatusBanner,
+    VaultaShieldArt,
 } from '@/components/auth/auth-ui';
 import { Pressable, Text, View } from '@/src/tw';
+import { useRouter } from 'expo-router';
+import React from 'react';
 
 const BANK = ['seed', 'fire', 'kill', 'dash', 'nope', 'tore', 'word'];
 
@@ -36,7 +35,6 @@ export default function RecoveryPhraseScreen() {
     return (
       <AuthScreenFrame title="">
         <View style={{ flex: 1, overflow: 'hidden' }}>
-          <SideDecorations />
           <View
             style={{
               alignItems: 'center',
@@ -79,7 +77,6 @@ export default function RecoveryPhraseScreen() {
   return (
     <AuthScreenFrame showBackButton title="">
       <View style={{ flex: 1, overflow: 'hidden' }}>
-        <SideDecorations />
         <View style={{ paddingHorizontal: 24, paddingTop: 12 }}>
           <Text
             className="font-inter font-extrabold"
